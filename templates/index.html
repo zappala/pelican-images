@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<div id="container" class="js-masonry" data-masonry-options='{ "gutter":10 }'>
+  {% for article in articles_page.object_list %}
+  <div class="item">
+    <div id="article_title">
+      <h2><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></h2>
+      <div id="article_meta">
+	<p>{{ article.locale_date }}</p>
+	{% if article.tags %}
+	<p>
+	  <i class="icon-tags"></i>
+	  {% for tag in article.tags %}
+	  <a href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a>{% if not loop.last %},{% endif %}
+	  {% endfor %}
+	</p>
+	{% endif %}
+      </div>
+      <div id="article_text">
+	<a href="{{ SITEURL }}/{{ article.url}}"><img class="front" src="{{ article.image }}"></a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
