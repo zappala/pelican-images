@@ -3,8 +3,8 @@
 
 {% block content %}
 <article>
-  <div id="article_text">
-    <h2>Archives</h2>
+  <div id="archives">
+    <h1>Archives</h1>
     <dl>
       {% set current_year = None %}
       {% set current_month = None %}
@@ -21,7 +21,7 @@
       {% set current_month = month %}
       <dt class="month">{{ article.date|strftime('%B') }}</dt>
       {% endif %}
-      <dd><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></dd>
+      <dd class="entry"><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></dd>
       {% endfor %}
     </dl>
   </div>

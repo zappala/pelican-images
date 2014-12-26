@@ -2,17 +2,20 @@
 <html lang="{{ DEFAULT_LANG }}">
 
 <head>
-  <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-  {% assets filters="less", output="css/style.css", "css/style.less" %}
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/foundation/5.4.7/css/normalize.css">
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/foundation/5.4.7/css/foundation.min.css">
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css">
+  <link rel="stylesheet/less" type="text/css" href="{{ SITEURL }}/theme/css/style.less">
   <link rel="stylesheet" href="{{ SITEURL }}/{{ ASSET_URL }}">
-  {% endassets %}
+  <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
   <link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="{{ AUTHOR }}">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/foundation/5.4.7/js/vendor/modernizr.js"></script>
+  <script src="{{ SITEURL}}/theme/js/less-1.4.1.min.js" type="text/javascript"></script>
   {% block description %}
   {% endblock %}
 
@@ -34,109 +37,108 @@
 </head>
 
 <body>
-  <div class="container-fluid">
-    <div class="row wrap">
-      <div class="col-md-10 col-md-push-2">
-	<main>
-	  <header>
-	    <div id="name">
-	      <img src="/images/cooking.png">{{ SITENAME }}
-	    </div>
-	    {% block header %}
-	    <nav class="navbar navbar-default" role="navigation">
-	      <div class="container-fluid">
-		<div class="navbar-header">
-		  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-		    <span class="sr-only">Toggle navigation</span>
-		    <span class="icon-bar"></span>
-		    <span class="icon-bar"></span>
-		    <span class="icon-bar"></span>
-		  </button>
-		  <a class="navbar-brand" href="/"><img src="/theme/images/cooking.png">{{ SITENAME }}</a>
-		</div>
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		  <ul class="nav navbar-nav">
-		    <li><a href="{{ SITEURL }}/index.html">Home</a></li>
-		    <li><a href="{{ SITEURL }}/archives.html">Archives</a></li>
-		  </ul>
-		</div>
-	      </div>
-	    </nav>
-	    {% endblock header %}
-	  </header>
-
-	  {% block content %}
-	  {% endblock %}
-
-	</main>
-      </div>
-      <div id="user_meta" class="col-md-2 col-md-pull-10" data-spy="affix" data-offset-top="0" data-offset-bottom="0">
-	<div id="sidebar-content">
-	  <h2><a href="{{ SITEURL }}">{{ AUTHOR }}</a></h2>
-	  <p class="tagline">{{ TAGLINE }}</p>
-	  <h4>{{ AFFILIATION }}</h4>
-	  <p class="linklabel">
-	    {% if LINKS %}
-	    {{ LINKS_LABEL}}
-	  </p>
-	  <ul>
-            {% for name, link in LINKS %}
-            <li><a href="{{ link }}" target="_blank">{{ name }}</a></li>
-            {% endfor %}
-	  </ul>
-	  {% endif %}
-	  {% if USER_LOGO_URL %}
-	  <img class="logo" src="{{ USER_LOGO_URL }}" alt="logo">
-	  {% else %}
-	  <img class="social" src="{{ SITEURL }}/theme/images/logo.png" alt="logo">
-	  {% endif %}
-	  <br class="clear">
-	  {% if FACEBOOK_URL %}
-	  <a href="{{FACEBOOK_URL}}"><img class="social" src="{{ SITEURL }}/theme/images/facebook.png" alt="facebook"></a>
-	  {% endif %}
-	  {% if GITHUB_URL %}
-	  <a href="{{GITHUB_URL}}"><img class="social" src="{{ SITEURL }}/theme/images/github.png" alt="github"></a>
-	  {% endif %}
-	  {% if GOOGLEPLUS_URL %}
-	  <a href="{{GOOGLEPLUS_URL}}"><img class="social" src="{{ SITEURL }}/theme/images/gplus.png" alt="googleplus"></a>
-	  {% endif %}
-	  {% if TWITTER_URL %}
-	  <a href="{{TWITTER_URL}}"><img class="social" src="{{ SITEURL }}/theme/images/twitter.png" alt="twitter"></a>
-	  {% endif %}
-	  {% if LINKEDIN_URL %}
-	  <a href="{{LINKEDIN_URL}}"><img class="social" src="{{ SITEURL }}/theme/images/linkedin.png" alt="linkedin"></a>
-	  {% endif %}
-	  {% if FEED_ALL_ATOM %}
-	  <a href="{{ FEED_DOMAIN }}/{{ FEED_ALL_ATOM }}"><img class="social" src="{{ SITEURL }}/theme/images/atom.png" alt="atom"></a>
-	  {% endif %}
-	  {% if EMAIL %}
-	  <p class="email">{{ EMAIL }}</p>
-	  {% endif %}
-	  {% if ADDRESS %}
-	  <p>{{ ADDRESS }}</p>
-	  {% endif %}
-	  {% if PHONE %}
-	  <p>{{ PHONE }}</p>
-	  {% endif %}
-	  <hr>
-	  <ul>
-	    {% for tag in tag_cloud %}
-            <li class="tag-{{ tag.1 }}"><a href="/tag/{{ tag.0 }}/">{{ tag.0 }}</a></li>
-	    {% endfor %}
-	  </ul>
-	  <hr>
-	  {% if LICENSE %}
-	  {{ LICENSE }}
-	  {% endif %}
-	  {% if COPYRIGHT %}
-	  <p>&copy {{ COPYRIGHT }}</p>
-	  {% endif %}
-	</div>
+  <div class="row wrap">
+    <div id="user_meta" class="medium-2 columns show-for-medium-up affix">
+      <div id="sidebar-content">
+	<h2><a href="{{ SITEURL }}">{{ AUTHOR }}</a></h2>
+	{% if USER_LOGO_URL %}
+	<img class="logo" src="{{ USER_LOGO_URL }}" alt="logo">
+	{% else %}
+	<img class="social" src="{{ SITEURL }}/theme/images/logo.png" alt="logo">
+	{% endif %}
+	<br class="clear">
+	{% if FACEBOOK_URL %}
+	<a href="{{FACEBOOK_URL}}"><img class="social" src="{{ SITEURL }}/theme/images/facebook.png" alt="facebook"></a>
+	{% endif %}
+	{% if GITHUB_URL %}
+	<a href="{{GITHUB_URL}}"><img class="social" src="{{ SITEURL }}/theme/images/github.png" alt="github"></a>
+	{% endif %}
+	{% if GOOGLEPLUS_URL %}
+	<a href="{{GOOGLEPLUS_URL}}"><img class="social" src="{{ SITEURL }}/theme/images/gplus.png" alt="googleplus"></a>
+	{% endif %}
+	{% if TWITTER_URL %}
+	<a href="{{TWITTER_URL}}"><img class="social" src="{{ SITEURL }}/theme/images/twitter.png" alt="twitter"></a>
+	{% endif %}
+	{% if LINKEDIN_URL %}
+	<a href="{{LINKEDIN_URL}}"><img class="social" src="{{ SITEURL }}/theme/images/linkedin.png" alt="linkedin"></a>
+	{% endif %}
+	{% if FEED_ALL_ATOM %}
+	<a href="{{ FEED_DOMAIN }}/{{ FEED_ALL_ATOM }}"><img class="social" src="{{ SITEURL }}/theme/images/atom.png" alt="atom"></a>
+	{% endif %}
+	{% if EMAIL %}
+	<p class="email">{{ EMAIL }}</p>
+	{% endif %}
+	<ul>
+	  {% for tag in tag_cloud %}
+          <li class="tag-{{ tag.1 }}"><a href="/tag/{{ tag.0 }}/">{{ tag.0 }}</a></li>
+	  {% endfor %}
+	</ul>
+	{% if LICENSE %}
+	{{ LICENSE }}
+	{% endif %}
+	{% if COPYRIGHT %}
+	<p>&copy {{ COPYRIGHT }}</p>
+	{% endif %}
       </div>
     </div>
+
+    <div class="medium-10 columns">
+      <main>
+	<header>
+	  <div id="name">
+	    <img src="/images/cooking.png">{{ SITENAME }}
+	  </div>
+	  {% block header %}
+	  <div class="show-for-medium-up">
+	    <nav class="top-bar" data-topbar role="navigation">
+	      <ul class="title-area">
+		<li class="toggle-topbar menu-icon"></li>
+	      </ul>
+	      <section class="top-bar-section">
+		<ul class="left">
+		  <li><a href="{{ SITEURL }}/index.html">Home</a></li>
+		  <li><a href="{{ SITEURL }}/archives.html">Archives</a></li>
+		</ul>
+	      </section>
+	    </nav>
+	  </div>
+	  {% endblock header %}
+	</header>
+	<div class="off-canvas-wrap" data-offcanvas>
+	  <div class="inner-wrap">
+	    <!-- OFF CANVAS MENU BAR -->
+            <nav class="tab-bar hide-for-medium-up">
+	      
+	      <section class="left-small">
+		<a class="left-off-canvas-toggle menu-icon" ><span></span></a>
+	      </section>
+
+	      <section class="middle tab-bar-section">
+		The Zappala Kitchen
+	      </section>
+	      
+            </nav> <!-- END NAV.TAB-BAR HIDE-FOR-LARGE-UP -->
+	    <!-- OFF CANVAS MENU -->
+            <aside class="left-off-canvas-menu">
+	      <ul class="off-canvas-list">
+		<li><label>Navigation</label></li>
+		<li><a href="{{ SITEURL }}/index.html">Home</a></li>
+		<li><a href="{{ SITEURL }}/archives.html">Archives</a></li>
+	      </ul>
+            </aside>
+	    {% block content %}
+	    {% endblock %}
+	    <a class="exit-off-canvas"></a>
+	  </div>
+	</div>
+      </main>
+    </div>
   </div>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-  <script src="/theme/js/masonry.pkgd.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/foundation/5.4.7/js/vendor/jquery.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/foundation/5.4.7/js/vendor/fastclick.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/foundation/5.4.7/js/foundation.min.js"></script>
+  <script>
+    $(document).foundation();
+  </script>
 </body>
 </html>
